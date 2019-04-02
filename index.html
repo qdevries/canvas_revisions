@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+	<title>Canvas Example</title>
+	<style type="text/css">
+		canvas{
+      border: 1px solid black;
+		}
+	</style>
+</head>
+
+<body>
+  <canvas id="canvas" width="500" height="500">
+  coool canvas </canvas>
+  
+  <input type="color" id="cpk" value=#FF4500> 
+
+  <script>
+  var canvas = document.querySelector("canvas");
+  var ctx = canvas.getContext("2d");
+  var x = 25;
+  var y = 25;
+  var color = "red";
+  var radius = 10;
+  var touchX;
+  var touchY;
+
+ // Set canvas dimensions
+  window.addEventListener('resize', function(e){
+    console.log(window.visualViewport)
+  var windowHeight = window.visualViewport.height*.8;
+  var windowWidth = window.visualViewport.Width*.8;
+  })
+
+  function draw(){
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = color;
+    ctx.fill();
+  //draws circle  
+  }
+
+  window.addEventListener('mousemove', function(e){
+  x = e.x ;
+  y = e.y;  
+  //console.log(x);
+  //console.log(y);
+  draw();
+  })
+
+  window.addEventListener("keyup", function(e){
+    if (e.keyCode == "66"){
+      color = "blue";}
+
+    if (e.keyCode == "89"){
+      color = "yellow";}  
+
+    if (e.keyCode == "71"){
+    color = "green";} 
+    
+    if (e.keyCode == "82"){
+    color = "red";} 
+
+    if (e.keyCode == "38"){
+    radius = radius + 1 ;} 
+    
+    if (e.keyCode == "40"){
+    radius = radius - 1;} 
+
+    if (e.keyCode == "32")
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    if (radius <= 1) 
+      radius = 1;
+    
+    if (radius >= 50) 
+      radius = 50;
+  })
+
+  window.addEventListener('touchmove', function(e) {
+      x = e.touches[0].screenX;
+      y = e.touches[0].screenY;
+      draw();
+    //console.log("x = "+x );
+    //console.log("y = "+y)
+  })
+
+  //clears on orientation change
+  window.addEventListener("orientationchange", function(e) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  })
+  
+  function change(e){
+    color = this.value;
+}
+
+var colorpicker = document.getElementById("cpk");
+colorpicker.addEventListener("change",function(e){
+  color = colorpicker.value;
+  //console.log(colorpicker.value)
+}) 
+   </script>
+  </body>
+</html>
