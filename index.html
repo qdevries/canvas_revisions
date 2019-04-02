@@ -25,13 +25,17 @@
   var radius = 10;
   var touchX;
   var touchY;
+  var windoweHight = 80;
+  var windowWidth = 80;
+  canvas.width = window.innerWidth *.8;
+  canvas.height = window.innerHeight *.8;
 
- // Set canvas dimensions
-  window.addEventListener('resize', function(e){
-    console.log(window.visualViewport)
-    var windowHeight = window.visualViewport.height*.8;
-    var windowWidth = window.visualViewport.Width*.8;
-  })
+ // Set canvas resize
+  // window.addEventListener('resize', function(e){
+  //   console.log(window.visualViewport);
+  //   var windowHeight = window.innerHeight;
+  //   var windowWidth = window.innerWidth;
+  // })
 
   function draw(){
     ctx.beginPath();
@@ -42,8 +46,8 @@
   }
 
   window.addEventListener('mousemove', function(e){
-  x = e.x ;
-  y = e.y;  
+  x = e.pageX ;
+  y = e.pageY;  
   //console.log(x);
   //console.log(y);
   draw();
@@ -88,8 +92,8 @@
 
   //clears on orientation change
   window.addEventListener("orientationchange", function(e) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  })
+    location.reload();
+    })
   
   function change(e){
     color = this.value;
